@@ -1,0 +1,22 @@
+# ---- core web stack ----
+fastapi==0.111.0          # API framework
+uvicorn[standard]==0.29.0 # ASGI server + reload
+
+# ---- async task queue ----
+celery==5.3.6
+redis>=5.0.0              # Python client that Celery uses for broker/results
+
+# ---- scraping / image utils ----
+playwright==1.42.0        # headless browser driver
+pillow==10.2.0            # image handling for palette extraction
+numpy==1.26.4
+scikit-learn==1.4.2       # K‑means clustering
+
+# ---- LLM client (coming up) ----
+openai==1.24.0            # or swap for anthropic if you prefer
+tenacity==8.2.3           # handy retry decorator for API rate‑limits
+
+# ---- misc helpers ----
+python-dotenv==1.0.1      # load .env into os.environ at boot (optional)
+pydantic==2.7.1           # FastAPI’s data‑validation backend
+requests>=2.28.0
