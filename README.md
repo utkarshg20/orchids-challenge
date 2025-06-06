@@ -1,43 +1,68 @@
-# Orchids SWE Intern Challenge Template
+# Orchids SWE Intern Challenge
 
-This project consists of a backend built with FastAPI and a frontend built with Next.js and TypeScript.
+This project has a **backend** (FastAPI + Celery) and a **frontend** (Next.js + TypeScript).
+
+---
 
 ## Backend
 
-The backend uses `uv` for package management.
+The backend runs in a Python virtual environment and uses Redis + Celery for task queuing.
 
-### Installation
-
-To install the backend dependencies, run the following command in the backend project directory:
+### 1. Setup
 
 ```bash
-uv sync
+# go to backend source
+cd backend
+
+# create & activate venv
+python3 -m venv .venv
+source .venv/bin/activate        # on Windows: .venv\Scripts\activate
+
+# install Python packages
+pip install -r requirements.txt
+
+# install Playwright browsers
+playwright install
 ```
 
-### Running the Backend
+### 2. Environment
+```bash
+# copy example env and add your keys / URLs
+cp .env.example .env
+# edit .env – set OPENAI_API_KEY and REDIS_URL
+```
 
-To run the backend development server, use the following command:
+### 3. Run
+Start Redis (e.g. redis-server) in the background, then:
 
 ```bash
-uv run fastapi dev
+# 1️⃣ Celery worker
+cd backend
+source .venv/bin/activate
+celery -A backend.tasks worker --loglevel=info
+```
+
+```bash
+# 2️⃣ FastAPI server
+cd backend
+source .venv/bin/activate
+uvicorn backend.main:app --reload --port 8000
 ```
 
 ## Frontend
 
-The frontend is built with Next.js and TypeScript.
-
-### Installation
-
-To install the frontend dependencies, navigate to the frontend project directory and run:
-
+### 1. Setup
 ```bash
-npm install
+# go to frontend source
+cd frontend
+
+# install Node packages
+npm install            # or: yarn install
 ```
 
-### Running the Frontend
-
-To start the frontend development server, run:
+### 2. Run
 
 ```bash
-npm run dev
+cd frontend
+npm run dev  
 ```

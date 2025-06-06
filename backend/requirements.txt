@@ -1,22 +1,37 @@
-# ---- core web stack ----
-fastapi==0.111.0          # API framework
-uvicorn[standard]==0.29.0 # ASGI server + reload
+# Backend requirements for Orchids project
 
-# ---- async task queue ----
-celery==5.3.6
-redis>=5.0.0              # Python client that Celery uses for broker/results
+# Celery for task queue
+celery>=5.3.6
 
-# ---- scraping / image utils ----
-playwright==1.42.0        # headless browser driver
-pillow==10.2.0            # image handling for palette extraction
-numpy==1.26.4
-scikit-learn==1.4.2       # K‑means clustering
+# Redis client for Python (and decode_responses=True)
+redis>=4.5.5
 
-# ---- LLM client (coming up) ----
-openai==1.24.0            # or swap for anthropic if you prefer
-tenacity==8.2.3           # handy retry decorator for API rate‑limits
+# Load environment variables from a .env file
+python-dotenv>=1.0.0
 
-# ---- misc helpers ----
-python-dotenv==1.0.1      # load .env into os.environ at boot (optional)
-pydantic==2.7.1           # FastAPI’s data‑validation backend
-requests>=2.28.0
+# Ultra-fast JSON (used in extract_json, dumps)
+orjson>=3.9.1
+
+# SASS/SCSS compiler (libsass wrapper)
+libsass>=0.23.0
+
+# Retry decorator for OpenAI API calls
+tenacity>=8.2.2
+
+# OpenAI Python client
+openai>=0.27.0
+
+# HTTP requests
+requests>=2.28.2
+
+# Playwright (used in scraper to drive a headless browser)
+playwright>=1.37.0
+
+# BeautifulSoup (HTML parsing in scraper)
+beautifulsoup4>=4.11.1
+
+# Scikit-learn (used for any clustering/analysis in scraper)
+scikit-learn>=1.2.2
+
+# Any other dependencies you brought in within backend/scraper.py
+lxml>=4.9.2
